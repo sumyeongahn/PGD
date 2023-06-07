@@ -302,7 +302,6 @@ class Learner(object):
         target = ['fc'] if 'ResNet' in self.args.model else ['fc']
         grad = grad_feat_ext(self.model_b,target, len(self.train_loader.dataset))
         
-        blabel = t.zeros(len(self.train_loader.dataset))
         idxorder = t.zeros(len(self.train_loader.dataset))
         start, end = 0,0
 
@@ -319,7 +318,6 @@ class Learner(object):
                 loss_b[sample_idx].backward(retain_graph = True)
 
             end = start + len(label)
-            blabel[start:end] = bias_label.detach().cpu()
             idxorder[start:end] = idx.detach().cpu()
             start = end
             
@@ -333,8 +331,6 @@ class Learner(object):
         
         # Magnitude
         order = t.argsort(idxorder)
-        label = label[order]
-        blabel = blabel[order]
         mag = t.clamp(score[order],min=1e-8)
         inv_mag = 1./mag
         norm_inv_mag = inv_mag / t.sum(inv_mag)
@@ -343,10 +339,7 @@ class Learner(object):
 
         self.train_loader.dataset.update_prob(mag_prob)
         self.train_loader.dataset.prob_sample_on()
-        
-        if self.args.save_stats:
-            gradient_analysis(label, blabel, mag, self.args.print)
-            prob_analysis(label,blabel,mag_prob ,self.args.print)
+        blabel,mag_prob ,self.args.print)
         
         del(grad_mat)
 
