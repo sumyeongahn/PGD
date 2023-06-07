@@ -19,5 +19,5 @@ python generator.py --data colored_mnist --bias_ratio 0.005,0.01,0.05
 
 Step 2) Training
 ~~~
-python train.py --reproduce --b_ratio 0.005 --dataset colored_mnist --train --exp run0 
+python train.py --reproduce --bratio 0.005 --dataset colored_mnist --train --exp run0 
 ~~~
