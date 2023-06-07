@@ -57,7 +57,7 @@ if __name__ == '__main__':
     
     # Path
     args.exp = args.exp+str(args.seed)
-    args.log_dir = args.log_dir+args.dataset+'/'+args.algorithm+'/'+'bias_'+str(args.bratio)+'_noise_'+str(args.nratio)+'/'+args.exp+'/'
+    args.log_dir = args.log_dir+args.dataset+'/'+args.algorithm+'/'+'bias_'+str(args.bratio)+'/'+args.exp+'/'
     os.makedirs(args.log_dir, exist_ok=True)
     
     
