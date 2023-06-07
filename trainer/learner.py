@@ -16,8 +16,6 @@ from module.ema import *
 from module.gradient import *
 from module.scores import *
 
-from utils.analysis import *
-        
 class Learner(object):
     def __init__(self,args):
         self.device = t.device(args.device)
